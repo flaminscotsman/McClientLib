@@ -87,9 +87,7 @@ class TypeReader(object):
 
             data_len = self.read_short()
             if data_len != -1:
-                byte_array = self.read_bytearray(length=data_len)
-
-                slot.data = NBTFile(BytesIO(byte_array),
+                slot.data = NBTFile(BytesIO(self.read(data_len)),
                                     compression=NBTFile.Compression.GZIP)
 
         return slot
