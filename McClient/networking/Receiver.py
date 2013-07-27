@@ -756,6 +756,19 @@ class Receiver(BaseReceiver):
 
         return toReturn
 
+    def handle85(self):
+        EID = self.connection.read_byte()
+        x = self.connection.read_int()
+        y = self.connection.read_int()
+        z = self.connection.read_int()
+
+        toReturn = {"EID": EID,
+                    "x": x,
+                    "y": y,
+                    "z": z}
+
+        return toReturn
+
     def handle84(self):
         x = self.connection.read_int()
         y = self.connection.read_short()
