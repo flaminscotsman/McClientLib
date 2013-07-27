@@ -421,7 +421,18 @@ class Receiver(BaseReceiver):
         for i in xrange(prop_count):
             key = self.connection.read_string()
             value = self.connection.read_double()
-            properties[key] = value
+            list_length = self.connection.read_short()
+            list = {}
+            for i in xrange(list_length):
+                MSB = self.connection.read_long()
+                LSB = self.connection.read_long()
+                amount = self.connection.read_double()
+                operation = self.connection.read_byte()
+                list['UUID (MSB)'] = MSB
+                list['UUID (LSB)'] = LSB
+                list['Amount'] = amount
+                list['Operation'] = operation
+            properties[i] = ({key:value}, list)
 
         toReturn = {"EID": EID,
                     "properties": properties}
