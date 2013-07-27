@@ -813,10 +813,8 @@ class Receiver(BaseReceiver):
         return toReturn
 
     def handleCB(self):
-        # TODO Split text field
-        # See wiki.vg
         text = self.connection.read_string()
-        toReturn = {"text": text}
+        toReturn = {"text": tuple(text.split('\c'))}
 
         return toReturn
 
